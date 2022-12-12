@@ -3,8 +3,8 @@ const request = require('request');
 const cheerio = require('cheerio');
 
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, {polling: true});
-
 const desiredUsername = process.env.DESIRED_USERNAME;
+const channelId = process.env.TELEGRAM_CHANNEL_ID;
 let announceUnavailable = false;
 
 bot.on('message', function(message) {
@@ -25,18 +25,18 @@ const options = {
 function checkUsername() {
   request(options, function(error, response, html) {
     if (error) {
-      bot.sendMessage('357187163', `Error checking availability of username ${desiredUsername}: ${error}`);
+      bot.sendMessage(channelId, `Error checking availability of username ${desiredUsername}: ${error}`);
     } else {
       const $ = cheerio.load(html);
   
       if ($('span').text().includes(`User "${desiredUsername}" not found`)) {
-        bot.sendMessage('357187163', `Username ${desiredUsername} is now available.`);
+        bot.sendMessage(channelId, `Username ${desiredUsername} is now available.`);
       } else {
         console.log(`Username ${desiredUsername} is not available.`);
 
         if (!announceUnavailable) return;
         announceUnavailable = false;
-        bot.sendMessage('357187163', `Username ${desiredUsername} is not available.`);
+        bot.sendMessage(channelId, `Username ${desiredUsername} is not available.`);
       }
     }
   });
