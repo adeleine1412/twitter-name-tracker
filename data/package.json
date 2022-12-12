@@ -1,0 +1,16 @@
+{
+  "name": "twitter-rename",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "adeleine1412",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "node-telegram-bot-api": "^0.60.0",
+    "request": "^2.88.2"
+  }
+}

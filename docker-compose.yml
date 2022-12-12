@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  node:
+    build: .
+    command: npm start
+    env_file:
+     - .env
+    volumes:
+      - ./data:/usr/app/
+      - /usr/app/node_modules
